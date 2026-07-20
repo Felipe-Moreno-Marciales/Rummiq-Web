@@ -1,0 +1,43 @@
+# Dependencias
+node_modules/
+.pnp
+.pnp.js
+
+# Builds
+dist/
+dist-ssr/
+build/
+
+# Cachés de herramientas
+.vite/
+*.tsbuildinfo
+coverage/
+.eslintcache
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Entorno y secretos (no deben existir en este proyecto)
+.env
+.env.*
+!.env.example
+*.pem
+
+# Editores / SO
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Temporales
+tmp/
+temp/
+.cache/

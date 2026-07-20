@@ -1,0 +1,33 @@
+.shell {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.card {
+  max-width: 32rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--color-accent);
+}
+
+.tagline {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.notice {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
