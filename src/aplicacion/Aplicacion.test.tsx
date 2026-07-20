@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import { App } from './App';
+import { Aplicacion } from './Aplicacion';
 
-describe('App', () => {
+describe('Aplicacion', () => {
   it('muestra el título de la aplicación', () => {
-    render(<App />);
+    render(<Aplicacion />);
     expect(screen.getByRole('heading', { name: /rummiq web/i })).toBeInTheDocument();
   });
 
   it('incluye el aviso de independencia frente a marcas comerciales', () => {
-    render(<App />);
+    render(<Aplicacion />);
     expect(screen.getByText(/implementación no oficial/i)).toBeInTheDocument();
   });
 });

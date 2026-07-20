@@ -1,11 +1,11 @@
 :root {
   color-scheme: light dark;
 
-  --color-bg: #f4f1ea;
-  --color-surface: #ffffff;
-  --color-text: #1c1b1a;
-  --color-text-muted: #5c5852;
-  --color-accent: #b3541e;
+  --color-fondo: #f4f1ea;
+  --color-superficie: #ffffff;
+  --color-texto: #1c1b1a;
+  --color-texto-atenuado: #5c5852;
+  --color-acento: #b3541e;
 
   font-family:
     system-ui,
@@ -20,11 +20,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #16130f;
-    --color-surface: #23201b;
-    --color-text: #f2ece1;
-    --color-text-muted: #b3aa9a;
-    --color-accent: #e08a4b;
+    --color-fondo: #16130f;
+    --color-superficie: #23201b;
+    --color-texto: #f2ece1;
+    --color-texto-atenuado: #b3aa9a;
+    --color-acento: #e08a4b;
   }
 }
 
@@ -42,8 +42,8 @@ body {
 
 body {
   min-height: 100dvh;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--color-fondo);
+  color: var(--color-texto);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -52,7 +52,7 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--color-acento);
   outline-offset: 2px;
 }
 

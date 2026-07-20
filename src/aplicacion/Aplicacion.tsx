@@ -1,4 +1,4 @@
-import styles from './App.module.css';
+import estilos from './Aplicacion.module.css';
 
 /**
  * Cáscara inicial de la aplicación.
@@ -6,17 +6,17 @@ import styles from './App.module.css';
  * En esta fase (inicialización) solo se establece el punto de entrada y la
  * identidad básica. Las pantallas del juego se construyen en fases posteriores.
  */
-export function App() {
+export function Aplicacion() {
   return (
-    <main className={styles.shell}>
-      <section className={styles.card} aria-labelledby="app-title">
-        <h1 id="app-title" className={styles.title}>
+    <main className={estilos.contenedor}>
+      <section className={estilos.tarjeta} aria-labelledby="titulo-app">
+        <h1 id="titulo-app" className={estilos.titulo}>
           Rummiq Web
         </h1>
-        <p className={styles.tagline}>
+        <p className={estilos.lema}>
           Juego de fichas independiente inspirado en los clásicos de tipo rummy.
         </p>
-        <p className={styles.notice}>
+        <p className={estilos.aviso}>
           Proyecto en construcción. Implementación no oficial y sin relación con marcas comerciales.
         </p>
       </section>

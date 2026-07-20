@@ -1,15 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from '@/app/App';
-import '@/styles/global.css';
+import { Aplicacion } from '@/aplicacion/Aplicacion';
+import '@/estilos/global.css';
 
-const container = document.getElementById('root');
-if (!container) {
+const contenedor = document.getElementById('root');
+if (!contenedor) {
   throw new Error('No se encontró el elemento raíz #root en el documento.');
 }
 
-createRoot(container).render(
+createRoot(contenedor).render(
   <StrictMode>
-    <App />
+    <Aplicacion />
   </StrictMode>,
 );

@@ -1,33 +1,33 @@
-.shell {
+.contenedor {
   min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: 1.5rem;
 }
 
-.card {
+.tarjeta {
   max-width: 32rem;
   text-align: center;
   padding: 2rem;
   border-radius: 1rem;
-  background: var(--color-surface);
+  background: var(--color-superficie);
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
 }
 
-.title {
+.titulo {
   margin: 0 0 0.5rem;
   font-size: clamp(2rem, 6vw, 3rem);
-  color: var(--color-accent);
+  color: var(--color-acento);
 }
 
-.tagline {
+.lema {
   margin: 0 0 1rem;
   font-size: 1.1rem;
-  color: var(--color-text);
+  color: var(--color-texto);
 }
 
-.notice {
+.aviso {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--color-text-muted);
+  color: var(--color-texto-atenuado);
 }

@@ -15,15 +15,21 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
+    setupFiles: ['./src/pruebas/configuracion.ts'],
     css: false,
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      // Umbrales altos reservados al dominio; se ajustan por fase.
-      include: ['src/domain/**/*.ts'],
-      exclude: ['src/domain/**/*.{test,spec}.ts', 'src/domain/**/types.ts'],
+      // Umbrales altos reservados al dominio (funciones puras del juego).
+      include: ['src/dominio/**/*.ts'],
+      exclude: ['src/dominio/**/*.{test,spec}.ts', 'src/dominio/**/tipos.ts'],
+      thresholds: {
+        statements: 90,
+        branches: 90,
+        functions: 90,
+        lines: 90,
+      },
     },
   },
 });
