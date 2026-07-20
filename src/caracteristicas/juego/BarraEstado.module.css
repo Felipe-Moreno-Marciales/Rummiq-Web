@@ -1,0 +1,28 @@
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 0.75rem;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  align-items: center;
+}
+
+.dato {
+  font-size: 0.9rem;
+  color: var(--color-texto-atenuado);
+}
+
+.turno {
+  font-weight: 700;
+  color: var(--color-texto);
+}

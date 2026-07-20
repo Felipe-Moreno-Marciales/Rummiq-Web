@@ -1,0 +1,46 @@
+.boton {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  min-height: 44px; /* área táctil cómoda */
+  border-radius: 0.6rem;
+  border: 1px solid var(--color-borde);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.boton:hover:not(:disabled) {
+  filter: brightness(0.97);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.completo {
+  width: 100%;
+}
+
+.primario {
+  background: var(--color-acento);
+  color: var(--color-acento-texto);
+  border-color: transparent;
+}
+
+.secundario {
+  background: var(--color-superficie);
+}
+
+.peligro {
+  background: transparent;
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.fantasma {
+  background: transparent;
+  border-color: transparent;
+}

@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Aplicacion } from '@/aplicacion/Aplicacion';
+import { ProveedorJuego } from '@/aplicacion/ProveedorJuego';
 import '@/estilos/global.css';
 
 const contenedor = document.getElementById('root');
@@ -10,6 +11,8 @@ if (!contenedor) {
 
 createRoot(contenedor).render(
   <StrictMode>
-    <Aplicacion />
+    <ProveedorJuego>
+      <Aplicacion />
+    </ProveedorJuego>
   </StrictMode>,
 );

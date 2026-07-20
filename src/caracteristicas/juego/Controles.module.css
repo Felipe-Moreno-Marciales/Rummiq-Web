@@ -1,0 +1,23 @@
+.controles {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+}
+
+.botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.botones > * {
+  flex: 1 1 8rem;
+}
+
+.mensaje {
+  margin: 0.5rem 0 0;
+  min-height: 1.4rem;
+  color: var(--color-error);
+  font-size: 0.9rem;
+}

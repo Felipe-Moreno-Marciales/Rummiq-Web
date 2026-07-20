@@ -6,6 +6,19 @@
   --color-texto: #1c1b1a;
   --color-texto-atenuado: #5c5852;
   --color-acento: #b3541e;
+  --color-acento-texto: #ffffff;
+  --color-borde: #d8d0bf;
+  --color-superficie-2: #efe8da;
+  --color-error: #b3261e;
+  --color-exito: #2e7d32;
+
+  /* Colores de ficha (se mantienen claras en ambos temas, como fichas reales). */
+  --ficha-fondo: #faf4e6;
+  --ficha-texto: #1c1b1a;
+  --ficha-rojo: #c0392b;
+  --ficha-azul: #1f6fb2;
+  --ficha-amarillo: #a8760a;
+  --ficha-negro: #222020;
 
   font-family:
     system-ui,
@@ -25,6 +38,11 @@
     --color-texto: #f2ece1;
     --color-texto-atenuado: #b3aa9a;
     --color-acento: #e08a4b;
+    --color-acento-texto: #16130f;
+    --color-borde: #3a352d;
+    --color-superficie-2: #2c2822;
+    --color-error: #ef8a82;
+    --color-exito: #86c98a;
   }
 }
 

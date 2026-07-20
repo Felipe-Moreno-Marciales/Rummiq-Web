@@ -1,0 +1,38 @@
+.contenedor {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 44rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--color-superficie);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.14);
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.titulo {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.tarjeta h2 {
+  font-size: 1.1rem;
+  color: var(--color-acento);
+  margin: 1.25rem 0 0.35rem;
+}
+
+.tarjeta p,
+.tarjeta li {
+  color: var(--color-texto);
+}

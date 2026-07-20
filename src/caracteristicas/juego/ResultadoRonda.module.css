@@ -1,0 +1,65 @@
+.fondo {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.55);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 10;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 32rem;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: var(--color-superficie);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+}
+
+.titulo {
+  margin: 0 0 0.25rem;
+  color: var(--color-acento);
+}
+
+.subtitulo {
+  margin: 0 0 1rem;
+}
+
+.seccion {
+  margin: 1rem 0 0.4rem;
+  font-size: 1rem;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabla th,
+.tabla td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.campeon {
+  margin: 1rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.acciones > * {
+  flex: 1 1 10rem;
+}

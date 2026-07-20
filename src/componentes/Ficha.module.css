@@ -1,0 +1,60 @@
+.ficha {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 3.4rem;
+  padding: 0.15rem;
+  border-radius: 0.4rem;
+  background: var(--ficha-fondo);
+  color: var(--ficha-texto);
+  border: 1px solid rgb(0 0 0 / 0.18);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+  user-select: none;
+  line-height: 1;
+}
+
+.numero {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.simbolo {
+  font-size: 0.85rem;
+  margin-top: 0.1rem;
+}
+
+.ficha[data-color='rojo'] {
+  color: var(--ficha-rojo);
+}
+.ficha[data-color='azul'] {
+  color: var(--ficha-azul);
+}
+.ficha[data-color='amarillo'] {
+  color: var(--ficha-amarillo);
+}
+.ficha[data-color='negro'] {
+  color: var(--ficha-negro);
+}
+
+.comodin {
+  background: linear-gradient(135deg, #fff7e0, #ffe0a3);
+  color: var(--ficha-negro);
+}
+
+.seleccionada {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 1px;
+  transform: translateY(-4px);
+}
+
+@media (min-width: 640px) {
+  .ficha {
+    width: 3rem;
+    height: 4rem;
+  }
+  .numero {
+    font-size: 1.6rem;
+  }
+}
