@@ -39,10 +39,13 @@ const MENSAJES: Record<CodigoErrorValidacion, string> = {
   'numeros-repetidos': 'Una escalera no puede repetir números.',
   'no-consecutivos': 'Los números de una escalera deben ser consecutivos.',
   'comodin-no-admitido': 'La validación básica todavía no admite comodines.',
+  'comodin-ambiguo': 'No se puede determinar de forma única el valor de los comodines.',
+  'numero-fuera-de-rango': 'La escalera se sale del rango del 1 al 13.',
   'combinacion-invalida': 'Las fichas no forman un grupo ni una escalera válidos.',
 };
 
-function crearError(codigo: CodigoErrorValidacion): ErrorValidacion {
+/** Construye un error de validación tipado con su mensaje legible en español. */
+export function crearError(codigo: CodigoErrorValidacion): ErrorValidacion {
   return { codigo, mensaje: MENSAJES[codigo] };
 }
 

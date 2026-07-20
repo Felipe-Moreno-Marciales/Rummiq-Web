@@ -55,6 +55,8 @@ export type CodigoErrorValidacion =
   | 'numeros-repetidos'
   | 'no-consecutivos'
   | 'comodin-no-admitido'
+  | 'comodin-ambiguo'
+  | 'numero-fuera-de-rango'
   | 'combinacion-invalida';
 
 /** Error de validación tipado, con mensaje legible en español. */
