@@ -23,7 +23,11 @@ export default defineConfig({
       reporter: ['text', 'html', 'lcov'],
       // Umbrales altos reservados al dominio (funciones puras del juego).
       include: ['src/dominio/**/*.ts'],
-      exclude: ['src/dominio/**/*.{test,spec}.ts', 'src/dominio/**/tipos.ts'],
+      exclude: [
+        'src/dominio/**/*.{test,spec}.ts',
+        'src/dominio/**/tipos.ts',
+        'src/dominio/**/tiposMotor.ts',
+      ],
       thresholds: {
         statements: 90,
         branches: 90,
