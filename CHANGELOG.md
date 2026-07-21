@@ -24,5 +24,7 @@ y el proyecto sigue el [versionado semántico](https://semver.org/lang/es/).
   API y animaciones desactivables; estadísticas y borrado de datos.
 - PWA instalable con service worker, aviso de actualización e iconos originales.
 - Documentación y workflows de integración continua y despliegue.
+- Compatibilidad con pnpm (`pnpm-workspace.yaml` que autoriza el build de
+  `esbuild` y `workbox-window` como dependencia directa), además de npm.
 
 [sin publicar]: https://github.com/Felipe-Moreno-Marciales/rummiq-web

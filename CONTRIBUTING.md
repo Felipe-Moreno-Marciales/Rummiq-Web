@@ -14,11 +14,15 @@ ni ñ (por ejemplo, `TAMANO_MINIMO_COMBINACION`).
 
 ## Requisitos
 
-- Node.js 20.19 o superior y npm.
+- Node.js 20.19 o superior.
+- npm o pnpm (ambos funcionan).
 
 ```bash
-npm install
+npm install   # o: pnpm install
 ```
+
+> Con pnpm, el `pnpm-workspace.yaml` del repositorio autoriza el build de
+> `esbuild`. La integración continua usa npm (`npm ci`).
 
 ## Antes de abrir un pull request
 
