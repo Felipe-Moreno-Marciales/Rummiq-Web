@@ -1,0 +1,26 @@
+.fondo {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.55);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 20;
+}
+
+.dialogo {
+  width: 100%;
+  max-width: 30rem;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: var(--color-superficie);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+}
+
+.titulo {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+  color: var(--color-acento);
+}

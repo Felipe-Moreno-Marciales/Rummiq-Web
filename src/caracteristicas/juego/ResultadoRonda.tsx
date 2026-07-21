@@ -1,5 +1,6 @@
-/** Superposición con el resultado de la ronda o de la partida. */
+/** Diálogo con el resultado de la ronda o de la partida. */
 import { Boton } from '@/componentes/Boton';
+import { Dialogo } from '@/componentes/Dialogo';
 import { usarJuego } from '@/ganchos/usarJuego';
 import { tablaPosiciones } from '@/dominio/juego/selectores';
 import type { Pantalla } from '@/aplicacion/pantallas';
@@ -21,92 +22,85 @@ export function ResultadoRonda({ ir }: Props) {
   const campeon = posiciones[0];
 
   return (
-    <div
-      className={estilos.fondo}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="titulo-resultado"
+    <Dialogo
+      titulo={finPartida ? 'Fin de la partida' : `Fin de la ronda ${estado.rondaActual}`}
+      cerrable={false}
     >
-      <div className={estilos.tarjeta}>
-        <h2 id="titulo-resultado" className={estilos.titulo}>
-          {finPartida ? 'Fin de la partida' : `Fin de la ronda ${estado.rondaActual}`}
-        </h2>
-        <p className={estilos.subtitulo}>
-          {resultado.motivo === 'bloqueo' ? 'La ronda se bloqueó. ' : ''}
-          Ganó la ronda: <strong>{nombre(resultado.idGanador)}</strong>
-        </p>
+      <p className={estilos.subtitulo}>
+        {resultado.motivo === 'bloqueo' ? 'La ronda se bloqueó. ' : ''}
+        Ganó la ronda: <strong>{nombre(resultado.idGanador)}</strong>
+      </p>
 
-        <h3 className={estilos.seccion}>Puntos de la ronda</h3>
-        <table className={estilos.tabla}>
-          <thead>
-            <tr>
-              <th scope="col">Jugador</th>
-              <th scope="col">Fichas</th>
-              <th scope="col">Puntos</th>
+      <h3 className={estilos.seccion}>Puntos de la ronda</h3>
+      <table className={estilos.tabla}>
+        <thead>
+          <tr>
+            <th scope="col">Jugador</th>
+            <th scope="col">Fichas</th>
+            <th scope="col">Puntos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {resultado.resultados.map((r) => (
+            <tr key={r.idJugador}>
+              <td>{nombre(r.idJugador)}</td>
+              <td>{r.valorAtril}</td>
+              <td>{r.puntos > 0 ? `+${r.puntos}` : r.puntos}</td>
             </tr>
-          </thead>
-          <tbody>
-            {resultado.resultados.map((r) => (
-              <tr key={r.idJugador}>
-                <td>{nombre(r.idJugador)}</td>
-                <td>{r.valorAtril}</td>
-                <td>{r.puntos > 0 ? `+${r.puntos}` : r.puntos}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
 
-        <h3 className={estilos.seccion}>Clasificación</h3>
-        <table className={estilos.tabla}>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Jugador</th>
-              <th scope="col">Puntos</th>
-              <th scope="col">Rondas</th>
+      <h3 className={estilos.seccion}>Clasificación</h3>
+      <table className={estilos.tabla}>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Jugador</th>
+            <th scope="col">Puntos</th>
+            <th scope="col">Rondas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {posiciones.map((p, i) => (
+            <tr key={p.id}>
+              <td>{i + 1}</td>
+              <td>{p.nombre}</td>
+              <td>{p.puntos}</td>
+              <td>{p.rondasGanadas}</td>
             </tr>
-          </thead>
-          <tbody>
-            {posiciones.map((p, i) => (
-              <tr key={p.id}>
-                <td>{i + 1}</td>
-                <td>{p.nombre}</td>
-                <td>{p.puntos}</td>
-                <td>{p.rondasGanadas}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          ))}
+        </tbody>
+      </table>
 
-        {finPartida && campeon && <p className={estilos.campeon}>🏆 Campeón: {campeon.nombre}</p>}
+      {finPartida && campeon && <p className={estilos.campeon}>🏆 Campeón: {campeon.nombre}</p>}
 
-        <div className={estilos.acciones}>
-          {finPartida ? (
-            <Boton
-              variante="primario"
-              onClick={() => {
-                salir();
-                ir('configuracion');
-              }}
-            >
-              Nueva partida
-            </Boton>
-          ) : (
-            <Boton variante="primario" onClick={() => despachar({ tipo: 'SIGUIENTE_RONDA' })}>
-              Siguiente ronda
-            </Boton>
-          )}
+      <div className={estilos.acciones}>
+        {finPartida ? (
           <Boton
-            variante="secundario"
+            variante="primario"
             onClick={() => {
               salir();
-              ir('inicio');
+              ir('configuracion');
             }}
           >
-            Volver al menú
+            Nueva partida
           </Boton>
-        </div>
+        ) : (
+          <Boton variante="primario" onClick={() => despachar({ tipo: 'SIGUIENTE_RONDA' })}>
+            Siguiente ronda
+          </Boton>
+        )}
+        <Boton
+          variante="secundario"
+          onClick={() => {
+            salir();
+            ir('inicio');
+          }}
+        >
+          Volver al menú
+        </Boton>
       </div>
-    </div>
+    </Dialogo>
   );
 }

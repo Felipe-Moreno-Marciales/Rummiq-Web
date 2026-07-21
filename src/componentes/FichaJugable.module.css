@@ -1,0 +1,18 @@
+.boton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: grab;
+  border-radius: 0.4rem;
+  /* Evita que el gesto de arrastre haga scroll en pantallas táctiles. */
+  touch-action: none;
+}
+
+.boton:disabled {
+  cursor: default;
+}
+
+.arrastrando {
+  opacity: 0.6;
+  z-index: 5;
+}

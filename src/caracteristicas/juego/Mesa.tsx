@@ -1,12 +1,22 @@
-/** Mesa central: muestra las combinaciones y marca las inválidas. */
-import { Ficha } from '@/componentes/Ficha';
+/** Mesa central: combinaciones seleccionables/arrastrables y zonas de soltar. */
+import { useDroppable } from '@dnd-kit/core';
+import { FichaJugable } from '@/componentes/FichaJugable';
+import { Boton } from '@/componentes/Boton';
 import { usarJuego } from '@/ganchos/usarJuego';
 import { combinacionesInvalidasActuales } from '@/dominio/juego/selectores';
 import { interpretarCombinacion } from '@/dominio/juego/reglasComodines';
 import { esComodin } from '@/dominio/juego/validadores';
+import type { Destino } from '@/dominio/juego/movimientos';
 import type { Combinacion } from '@/dominio/juego/tiposMotor';
 import type { ColorFicha, IdFicha, NumeroFicha } from '@/dominio/juego/tipos';
 import estilos from './Mesa.module.css';
+
+interface PropsMesa {
+  readonly seleccionadas: ReadonlySet<IdFicha>;
+  readonly haySeleccion: boolean;
+  readonly onAlternar: (id: IdFicha) => void;
+  readonly onMover: (destino: Destino) => void;
+}
 
 function interpretacionesComodin(
   combinacion: Combinacion,
@@ -21,8 +31,64 @@ function interpretacionesComodin(
   return mapa;
 }
 
-export function Mesa() {
+interface PropsCombinacion extends PropsMesa {
+  readonly combinacion: Combinacion;
+  readonly indice: number;
+  readonly invalida: boolean;
+}
+
+function CombinacionMesa({
+  combinacion,
+  indice,
+  invalida,
+  seleccionadas,
+  haySeleccion,
+  onAlternar,
+  onMover,
+}: PropsCombinacion) {
+  const { setNodeRef, isOver } = useDroppable({ id: `comb:${combinacion.id}` });
+  const interpretaciones = interpretacionesComodin(combinacion);
+  const clases = [
+    estilos.combinacion,
+    invalida ? estilos.invalida : '',
+    isOver ? estilos.encima : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <li
+      ref={setNodeRef}
+      className={clases}
+      aria-label={`Combinación ${indice + 1}${invalida ? ' (inválida)' : ''}`}
+    >
+      <div className={estilos.fichasCombinacion}>
+        {combinacion.fichas.map((ficha) => (
+          <FichaJugable
+            key={ficha.id}
+            ficha={ficha}
+            seleccionada={seleccionadas.has(ficha.id)}
+            onAlternar={onAlternar}
+            interpretacion={esComodin(ficha) ? interpretaciones.get(ficha.id) : undefined}
+          />
+        ))}
+      </div>
+      {haySeleccion && (
+        <Boton
+          variante="fantasma"
+          className={estilos.anadir}
+          onClick={() => onMover({ tipo: 'combinacion', id: combinacion.id })}
+        >
+          Añadir aquí
+        </Boton>
+      )}
+    </li>
+  );
+}
+
+export function Mesa({ seleccionadas, haySeleccion, onAlternar, onMover }: PropsMesa) {
   const { estado } = usarJuego();
+  const zonaNueva = useDroppable({ id: 'nueva' });
   if (!estado) return null;
 
   const combinaciones = estado.turno ? estado.turno.mesa : estado.mesa;
@@ -34,30 +100,37 @@ export function Mesa() {
         Mesa
       </h2>
       {combinaciones.length === 0 ? (
-        <p className={estilos.vacia}>La mesa está vacía. Baja tus combinaciones aquí.</p>
+        <p className={estilos.vacia}>La mesa está vacía. Crea combinaciones desde tu atril.</p>
       ) : (
         <ul className={estilos.combinaciones}>
-          {combinaciones.map((combinacion, indice) => {
-            const invalida = invalidas.has(indice);
-            const interpretaciones = interpretacionesComodin(combinacion);
-            return (
-              <li
-                key={combinacion.id}
-                className={`${estilos.combinacion} ${invalida ? estilos.invalida : ''}`}
-                aria-label={`Combinación ${indice + 1}${invalida ? ' (inválida)' : ''}`}
-              >
-                {combinacion.fichas.map((ficha) => (
-                  <Ficha
-                    key={ficha.id}
-                    ficha={ficha}
-                    interpretacion={esComodin(ficha) ? interpretaciones.get(ficha.id) : undefined}
-                  />
-                ))}
-              </li>
-            );
-          })}
+          {combinaciones.map((combinacion, indice) => (
+            <CombinacionMesa
+              key={combinacion.id}
+              combinacion={combinacion}
+              indice={indice}
+              invalida={invalidas.has(indice)}
+              seleccionadas={seleccionadas}
+              haySeleccion={haySeleccion}
+              onAlternar={onAlternar}
+              onMover={onMover}
+            />
+          ))}
         </ul>
       )}
+
+      <div
+        ref={zonaNueva.setNodeRef}
+        className={`${estilos.zonaNueva} ${zonaNueva.isOver ? estilos.encima : ''}`}
+      >
+        <span>Suelta aquí o pulsa para crear una combinación nueva</span>
+        <Boton
+          variante="secundario"
+          onClick={() => onMover({ tipo: 'nueva' })}
+          disabled={!haySeleccion}
+        >
+          Nueva combinación
+        </Boton>
+      </div>
     </section>
   );
 }

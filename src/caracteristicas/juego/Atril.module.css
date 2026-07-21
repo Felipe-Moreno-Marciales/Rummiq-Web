@@ -40,6 +40,11 @@
   min-height: 3.8rem;
   background: var(--color-superficie-2);
   border-radius: 0.5rem;
+  border: 2px dashed transparent;
+}
+
+.encima {
+  border-color: var(--color-acento);
 }
 
 .vacio {

@@ -37,3 +37,14 @@
   font-size: 0.85rem;
   color: var(--color-texto-atenuado);
 }
+
+.accionesDialogo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.accionesDialogo > * {
+  flex: 1 1 10rem;
+}
