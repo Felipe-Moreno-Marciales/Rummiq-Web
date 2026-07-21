@@ -1,2 +1,5 @@
+# Configuración de pnpm.
+# Permite ejecutar el script de build de esbuild (necesario para Vite),
+# que pnpm ignora por defecto por seguridad.
 allowBuilds:
-  esbuild: set this to true or false
+  esbuild: true
