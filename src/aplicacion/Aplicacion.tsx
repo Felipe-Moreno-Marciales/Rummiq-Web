@@ -4,6 +4,8 @@ import { PantallaInicio } from '@/caracteristicas/menu/PantallaInicio';
 import { PantallaConfiguracion } from '@/caracteristicas/menu/PantallaConfiguracion';
 import { PantallaReglas } from '@/caracteristicas/reglas/PantallaReglas';
 import { PantallaTablero } from '@/caracteristicas/juego/PantallaTablero';
+import { PantallaAjustes } from '@/caracteristicas/ajustes/PantallaAjustes';
+import { PantallaEstadisticas } from '@/caracteristicas/estadisticas/PantallaEstadisticas';
 import type { Pantalla } from './pantallas';
 
 export function Aplicacion() {
@@ -17,6 +19,10 @@ export function Aplicacion() {
       return <PantallaReglas ir={ir} />;
     case 'tablero':
       return <PantallaTablero ir={ir} />;
+    case 'ajustes':
+      return <PantallaAjustes ir={ir} />;
+    case 'estadisticas':
+      return <PantallaEstadisticas ir={ir} />;
     case 'inicio':
     default:
       return <PantallaInicio ir={ir} />;

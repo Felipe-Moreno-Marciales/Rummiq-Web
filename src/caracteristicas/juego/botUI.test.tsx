@@ -1,8 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { Aplicacion } from '@/aplicacion/Aplicacion';
-import { ProveedorJuego } from '@/aplicacion/ProveedorJuego';
+import { renderAplicacion } from '@/pruebas/utilidades';
 import { crearPartida } from '@/dominio/juego/motorJuego';
 import { guardarPartida } from '@/servicios/almacenamiento/almacenamientoPartida';
 import { idFichaNumero } from '@/dominio/juego/crearConjuntoFichas';
@@ -40,11 +39,7 @@ describe('juego automático de la máquina', () => {
     guardarPartida(estado);
 
     const usuario = userEvent.setup();
-    render(
-      <ProveedorJuego>
-        <Aplicacion />
-      </ProveedorJuego>,
-    );
+    renderAplicacion();
 
     await usuario.click(screen.getByRole('button', { name: /reanudar partida/i }));
     // Al principio es el turno de la máquina.

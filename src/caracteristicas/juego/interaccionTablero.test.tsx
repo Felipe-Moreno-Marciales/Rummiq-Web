@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { Aplicacion } from '@/aplicacion/Aplicacion';
-import { ProveedorJuego } from '@/aplicacion/ProveedorJuego';
+import { renderAplicacion } from '@/pruebas/utilidades';
 import { crearPartida } from '@/dominio/juego/motorJuego';
 import { guardarPartida } from '@/servicios/almacenamiento/almacenamientoPartida';
 import { idFichaNumero } from '@/dominio/juego/crearConjuntoFichas';
@@ -37,13 +36,7 @@ function guardarPartidaControlada() {
   guardarPartida(estado);
 }
 
-function renderApp() {
-  return render(
-    <ProveedorJuego>
-      <Aplicacion />
-    </ProveedorJuego>,
-  );
-}
+const renderApp = renderAplicacion;
 
 beforeEach(() => localStorage.clear());
 afterEach(() => localStorage.clear());

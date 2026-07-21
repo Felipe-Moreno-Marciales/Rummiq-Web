@@ -1,9 +1,12 @@
 /** Pantalla de tablero: compone la mesa, el atril, los oponentes y los controles. */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DndContext, PointerSensor, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
 import { usarJuego } from '@/ganchos/usarJuego';
-import { jugadorActual } from '@/dominio/juego/selectores';
+import { usarAjustes } from '@/ganchos/usarAjustes';
+import { jugadorActual, tablaPosiciones } from '@/dominio/juego/selectores';
 import { moverFichas, type Destino } from '@/dominio/juego/movimientos';
+import { reproducirSonido } from '@/servicios/audio/sonidos';
+import { registrarPartida } from '@/servicios/almacenamiento/almacenamientoEstadisticas';
 import type { IdFicha } from '@/dominio/juego/tipos';
 import type { Pantalla } from '@/aplicacion/pantallas';
 import { BarraEstado } from './BarraEstado';
@@ -30,6 +33,7 @@ const RETRASO_MAQUINA_MS = 700;
 
 export function PantallaTablero({ ir }: Props) {
   const { estado, despachar, jugarBot } = usarJuego();
+  const { ajustes } = usarAjustes();
   const [seleccion, setSeleccion] = useState<IdFicha[]>([]);
 
   // Solo puntero (ratón/táctil): dnd-kit reserva Enter/Espacio para arrastrar con
@@ -68,11 +72,34 @@ export function PantallaTablero({ ir }: Props) {
       if (ids.length === 0 || !estado?.turno) return;
       const zonas = { mesa: estado.turno.mesa, atril: estado.turno.atril };
       const resultado = moverFichas(zonas, ids, destino);
+      reproducirSonido('mover', ajustes.sonidos);
       despachar({ tipo: 'ESTABLECER_PROVISIONAL', mesa: resultado.mesa, atril: resultado.atril });
       setSeleccion([]);
     },
-    [estado, despachar, seleccion],
+    [estado, despachar, seleccion, ajustes.sonidos],
   );
+
+  // Sonido de fin de ronda/partida y registro de estadísticas al terminar.
+  const faseAnterior = useRef<string | undefined>(undefined);
+  const partidaRegistrada = useRef(false);
+  useEffect(() => {
+    const fase = estado?.fase;
+    if (fase === faseAnterior.current) return;
+    faseAnterior.current = fase;
+    if (fase === 'jugando') partidaRegistrada.current = false;
+    if (fase === 'fin-ronda' || fase === 'fin-partida') {
+      reproducirSonido('ganar', ajustes.sonidos);
+    }
+    if (estado && fase === 'fin-partida' && !partidaRegistrada.current) {
+      partidaRegistrada.current = true;
+      const posiciones = tablaPosiciones(estado);
+      registrarPartida({
+        ganador: posiciones[0]?.nombre ?? '',
+        jugadores: posiciones.map((p) => ({ nombre: p.nombre, puntos: p.puntos })),
+        rondas: estado.config.rondas,
+      });
+    }
+  }, [estado, ajustes.sonidos]);
 
   const alSoltar = useCallback(
     (evento: DragEndEvent) => {

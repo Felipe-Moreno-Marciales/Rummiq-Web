@@ -1,0 +1,92 @@
+.contenedor {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 36rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--color-superficie);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.titulo {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.grupo {
+  border: 1px solid var(--color-borde);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 0;
+}
+
+.leyenda {
+  font-weight: 600;
+  padding: 0 0.4rem;
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.opciones > * {
+  flex: 1 1 6rem;
+}
+
+.interruptores {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.interruptor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 1rem;
+}
+
+.datos {
+  border-top: 1px solid var(--color-borde);
+  padding-top: 1rem;
+}
+
+.subtitulo {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+}
+
+.aviso {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-texto-atenuado);
+}
+
+.accionesDialogo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.accionesDialogo > * {
+  flex: 1 1 10rem;
+}

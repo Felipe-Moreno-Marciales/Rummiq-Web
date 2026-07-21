@@ -56,6 +56,12 @@ export function PantallaInicio({ ir }: Props) {
           <Boton variante="secundario" anchoCompleto onClick={() => ir('reglas')}>
             Reglas
           </Boton>
+          <Boton variante="secundario" anchoCompleto onClick={() => ir('estadisticas')}>
+            Estadísticas
+          </Boton>
+          <Boton variante="secundario" anchoCompleto onClick={() => ir('ajustes')}>
+            Ajustes
+          </Boton>
         </nav>
 
         <p className={estilos.aviso}>

@@ -1,16 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { Aplicacion } from './Aplicacion';
-import { ProveedorJuego } from './ProveedorJuego';
+import { renderAplicacion } from '@/pruebas/utilidades';
 
-function renderApp() {
-  return render(
-    <ProveedorJuego>
-      <Aplicacion />
-    </ProveedorJuego>,
-  );
-}
+const renderApp = renderAplicacion;
 
 beforeEach(() => localStorage.clear());
 afterEach(() => localStorage.clear());

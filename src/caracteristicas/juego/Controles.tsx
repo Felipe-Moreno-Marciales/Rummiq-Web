@@ -1,6 +1,9 @@
 /** Controles principales del turno y mensajes de validación. */
 import { Boton } from '@/componentes/Boton';
 import { usarJuego } from '@/ganchos/usarJuego';
+import { usarAjustes } from '@/ganchos/usarAjustes';
+import { evaluarConfirmacion } from '@/dominio/juego/motorJuego';
+import { reproducirSonido } from '@/servicios/audio/sonidos';
 import estilos from './Controles.module.css';
 
 interface Props {
@@ -9,25 +12,30 @@ interface Props {
 
 export function Controles({ bloqueado = false }: Props) {
   const { estado, despachar } = usarJuego();
+  const { ajustes } = usarAjustes();
   if (!estado) return null;
 
   const pozoVacio = estado.pozo.length === 0;
 
+  function confirmar() {
+    if (!estado) return;
+    const permitida = evaluarConfirmacion(estado).permitida;
+    reproducirSonido(permitida ? 'confirmar' : 'error', ajustes.sonidos);
+    despachar({ tipo: 'CONFIRMAR' });
+  }
+
+  function robar() {
+    reproducirSonido('robar', ajustes.sonidos);
+    despachar({ tipo: 'ROBAR' });
+  }
+
   return (
     <section className={estilos.controles} aria-label="Controles del turno">
       <div className={estilos.botones}>
-        <Boton
-          variante="primario"
-          onClick={() => despachar({ tipo: 'CONFIRMAR' })}
-          disabled={bloqueado}
-        >
+        <Boton variante="primario" onClick={confirmar} disabled={bloqueado}>
           Confirmar jugada
         </Boton>
-        <Boton
-          variante="secundario"
-          onClick={() => despachar({ tipo: 'ROBAR' })}
-          disabled={bloqueado || pozoVacio}
-        >
+        <Boton variante="secundario" onClick={robar} disabled={bloqueado || pozoVacio}>
           Robar ficha
         </Boton>
         <Boton

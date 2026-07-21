@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { Aplicacion } from '@/aplicacion/Aplicacion';
-import { ProveedorJuego } from '@/aplicacion/ProveedorJuego';
+import { renderAplicacion } from './utilidades';
 
 beforeEach(() => localStorage.clear());
 afterEach(() => localStorage.clear());
@@ -10,11 +9,7 @@ afterEach(() => localStorage.clear());
 describe('flujo principal', () => {
   it('permite configurar una partida, entrar al tablero y robar una ficha', async () => {
     const usuario = userEvent.setup();
-    render(
-      <ProveedorJuego>
-        <Aplicacion />
-      </ProveedorJuego>,
-    );
+    renderAplicacion();
 
     // Inicio -> Configuración
     await usuario.click(screen.getByRole('button', { name: /nueva partida/i }));

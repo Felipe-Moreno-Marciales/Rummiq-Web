@@ -31,8 +31,24 @@
   line-height: 1.5;
 }
 
+/* Variables del tema oscuro, reutilizadas por el tema oscuro explícito y por el
+   automático cuando el sistema prefiere oscuro. */
+:root[data-tema='oscuro'] {
+  --color-fondo: #16130f;
+  --color-superficie: #23201b;
+  --color-texto: #f2ece1;
+  --color-texto-atenuado: #b3aa9a;
+  --color-acento: #e08a4b;
+  --color-acento-texto: #16130f;
+  --color-borde: #3a352d;
+  --color-superficie-2: #2c2822;
+  --color-error: #ef8a82;
+  --color-exito: #86c98a;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-tema]),
+  :root[data-tema='automatico'] {
     --color-fondo: #16130f;
     --color-superficie: #23201b;
     --color-texto: #f2ece1;
@@ -96,4 +112,14 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Desactivación manual de animaciones desde los ajustes. */
+:root[data-animaciones='no'] *,
+:root[data-animaciones='no'] *::before,
+:root[data-animaciones='no'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
 }
