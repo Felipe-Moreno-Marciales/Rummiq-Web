@@ -6,12 +6,10 @@ import { PantallaReglas } from '@/caracteristicas/reglas/PantallaReglas';
 import { PantallaTablero } from '@/caracteristicas/juego/PantallaTablero';
 import { PantallaAjustes } from '@/caracteristicas/ajustes/PantallaAjustes';
 import { PantallaEstadisticas } from '@/caracteristicas/estadisticas/PantallaEstadisticas';
+import { AvisoActualizacion } from '@/componentes/AvisoActualizacion';
 import type { Pantalla } from './pantallas';
 
-export function Aplicacion() {
-  const [pantalla, setPantalla] = useState<Pantalla>('inicio');
-  const ir = (destino: Pantalla) => setPantalla(destino);
-
+function PantallaActual({ pantalla, ir }: { pantalla: Pantalla; ir: (p: Pantalla) => void }) {
   switch (pantalla) {
     case 'configuracion':
       return <PantallaConfiguracion ir={ir} />;
@@ -27,4 +25,16 @@ export function Aplicacion() {
     default:
       return <PantallaInicio ir={ir} />;
   }
+}
+
+export function Aplicacion() {
+  const [pantalla, setPantalla] = useState<Pantalla>('inicio');
+  const ir = (destino: Pantalla) => setPantalla(destino);
+
+  return (
+    <>
+      <PantallaActual pantalla={pantalla} ir={ir} />
+      <AvisoActualizacion />
+    </>
+  );
 }

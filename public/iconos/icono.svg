@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Rummiq Web">
+  <rect width="512" height="512" rx="112" fill="#23201b" />
+  <rect x="106" y="80" width="300" height="300" rx="44" fill="#faf4e6" />
+  <text
+    x="256"
+    y="292"
+    text-anchor="middle"
+    font-family="system-ui, 'Segoe UI', Arial, sans-serif"
+    font-weight="800"
+    font-size="210"
+    fill="#b3541e"
+  >
+    R
+  </text>
+  <circle cx="176" cy="430" r="26" fill="#c0392b" />
+  <circle cx="240" cy="430" r="26" fill="#1f6fb2" />
+  <circle cx="304" cy="430" r="26" fill="#a8760a" />
+  <circle cx="368" cy="430" r="26" fill="#222020" />
+</svg>
