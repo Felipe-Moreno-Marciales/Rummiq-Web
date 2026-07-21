@@ -9,6 +9,8 @@
 
 ## Comandos
 
+Puedes usar npm o pnpm; sustituye `npm run` por `pnpm` si prefieres pnpm.
+
 ```bash
 npm run test        # modo interactivo
 npm run test:run    # una ejecución
