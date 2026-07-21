@@ -11,11 +11,18 @@ import estilos from './Atril.module.css';
 interface Props {
   readonly seleccionadas: ReadonlySet<IdFicha>;
   readonly haySeleccion: boolean;
+  readonly bloqueado?: boolean;
   readonly onAlternar: (id: IdFicha) => void;
   readonly onMover: (destino: Destino) => void;
 }
 
-export function Atril({ seleccionadas, haySeleccion, onAlternar, onMover }: Props) {
+export function Atril({
+  seleccionadas,
+  haySeleccion,
+  bloqueado = false,
+  onAlternar,
+  onMover,
+}: Props) {
   const { estado, despachar } = usarJuego();
   const { setNodeRef, isOver } = useDroppable({ id: 'atril' });
   const turno = estado?.turno;
@@ -34,26 +41,28 @@ export function Atril({ seleccionadas, haySeleccion, onAlternar, onMover }: Prop
           <Boton
             variante="secundario"
             onClick={() => onMover({ tipo: 'nueva' })}
-            disabled={!haySeleccion}
+            disabled={!haySeleccion || bloqueado}
           >
             Crear combinación
           </Boton>
           <Boton
             variante="secundario"
             onClick={() => onMover({ tipo: 'atril' })}
-            disabled={!haySeleccion}
+            disabled={!haySeleccion || bloqueado}
           >
             Devolver al atril
           </Boton>
           <Boton
             variante="secundario"
             onClick={() => despachar({ tipo: 'ORDENAR_ATRIL', criterio: 'numero' })}
+            disabled={bloqueado}
           >
             Ordenar nº
           </Boton>
           <Boton
             variante="secundario"
             onClick={() => despachar({ tipo: 'ORDENAR_ATRIL', criterio: 'color' })}
+            disabled={bloqueado}
           >
             Ordenar color
           </Boton>
@@ -71,6 +80,7 @@ export function Atril({ seleccionadas, haySeleccion, onAlternar, onMover }: Prop
               ficha={ficha}
               seleccionada={seleccionadas.has(ficha.id)}
               onAlternar={onAlternar}
+              deshabilitada={bloqueado}
             />
           </li>
         ))}

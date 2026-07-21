@@ -14,6 +14,7 @@ import estilos from './Mesa.module.css';
 interface PropsMesa {
   readonly seleccionadas: ReadonlySet<IdFicha>;
   readonly haySeleccion: boolean;
+  readonly bloqueado?: boolean;
   readonly onAlternar: (id: IdFicha) => void;
   readonly onMover: (destino: Destino) => void;
 }
@@ -43,6 +44,7 @@ function CombinacionMesa({
   invalida,
   seleccionadas,
   haySeleccion,
+  bloqueado = false,
   onAlternar,
   onMover,
 }: PropsCombinacion) {
@@ -70,6 +72,7 @@ function CombinacionMesa({
             seleccionada={seleccionadas.has(ficha.id)}
             onAlternar={onAlternar}
             interpretacion={esComodin(ficha) ? interpretaciones.get(ficha.id) : undefined}
+            deshabilitada={bloqueado}
           />
         ))}
       </div>
@@ -78,6 +81,7 @@ function CombinacionMesa({
           variante="fantasma"
           className={estilos.anadir}
           onClick={() => onMover({ tipo: 'combinacion', id: combinacion.id })}
+          disabled={bloqueado}
         >
           Añadir aquí
         </Boton>
@@ -86,7 +90,13 @@ function CombinacionMesa({
   );
 }
 
-export function Mesa({ seleccionadas, haySeleccion, onAlternar, onMover }: PropsMesa) {
+export function Mesa({
+  seleccionadas,
+  haySeleccion,
+  bloqueado = false,
+  onAlternar,
+  onMover,
+}: PropsMesa) {
   const { estado } = usarJuego();
   const zonaNueva = useDroppable({ id: 'nueva' });
   if (!estado) return null;
@@ -111,6 +121,7 @@ export function Mesa({ seleccionadas, haySeleccion, onAlternar, onMover }: Props
               invalida={invalidas.has(indice)}
               seleccionadas={seleccionadas}
               haySeleccion={haySeleccion}
+              bloqueado={bloqueado}
               onAlternar={onAlternar}
               onMover={onMover}
             />
@@ -126,7 +137,7 @@ export function Mesa({ seleccionadas, haySeleccion, onAlternar, onMover }: Props
         <Boton
           variante="secundario"
           onClick={() => onMover({ tipo: 'nueva' })}
-          disabled={!haySeleccion}
+          disabled={!haySeleccion || bloqueado}
         >
           Nueva combinación
         </Boton>

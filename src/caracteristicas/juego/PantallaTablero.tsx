@@ -25,8 +25,11 @@ function destinoDesdeZona(idZona: string): Destino | null {
   return null;
 }
 
+/** Retraso antes de que la máquina juegue su turno (ritmo visual). */
+const RETRASO_MAQUINA_MS = 700;
+
 export function PantallaTablero({ ir }: Props) {
-  const { estado, despachar } = usarJuego();
+  const { estado, despachar, jugarBot } = usarJuego();
   const [seleccion, setSeleccion] = useState<IdFicha[]>([]);
 
   // Solo puntero (ratón/táctil): dnd-kit reserva Enter/Espacio para arrastrar con
@@ -43,6 +46,16 @@ export function PantallaTablero({ ir }: Props) {
   useEffect(() => {
     if (!estado) ir('inicio');
   }, [estado, ir]);
+
+  const jugador = estado ? jugadorActual(estado) : undefined;
+  const esTurnoMaquina = estado?.fase === 'jugando' && jugador?.tipo === 'maquina';
+
+  // La máquina juega su turno automáticamente tras un breve retraso.
+  useEffect(() => {
+    if (!esTurnoMaquina) return;
+    const temporizador = setTimeout(() => jugarBot(), RETRASO_MAQUINA_MS);
+    return () => clearTimeout(temporizador);
+  }, [esTurnoMaquina, idTurno, estado?.rondaActual, jugarBot]);
 
   const seleccionadas = useMemo(() => new Set(seleccion), [seleccion]);
 
@@ -75,9 +88,8 @@ export function PantallaTablero({ ir }: Props) {
 
   if (!estado) return null;
 
-  const jugador = jugadorActual(estado);
-  const esMaquina = jugador?.tipo === 'maquina';
   const haySeleccion = seleccion.length > 0;
+  const bloqueado = Boolean(esTurnoMaquina);
 
   return (
     <div className={estilos.tablero}>
@@ -87,10 +99,9 @@ export function PantallaTablero({ ir }: Props) {
         {estado.fase === 'jugando' && jugador ? `Turno de ${jugador.nombre}` : ''}
       </p>
 
-      {esMaquina && estado.fase === 'jugando' && (
-        <p className={estilos.avisoMaquina} role="note">
-          Turno de un jugador controlado por la máquina. La automatización se añade en una fase
-          posterior; por ahora puedes jugar su turno manualmente.
+      {esTurnoMaquina && (
+        <p className={estilos.avisoMaquina} role="note" aria-live="polite">
+          {jugador?.nombre} (máquina) está pensando…
         </p>
       )}
 
@@ -99,18 +110,20 @@ export function PantallaTablero({ ir }: Props) {
         <Mesa
           seleccionadas={seleccionadas}
           haySeleccion={haySeleccion}
+          bloqueado={bloqueado}
           onAlternar={alternar}
           onMover={mover}
         />
         <Atril
           seleccionadas={seleccionadas}
           haySeleccion={haySeleccion}
+          bloqueado={bloqueado}
           onAlternar={alternar}
           onMover={mover}
         />
       </DndContext>
 
-      <Controles />
+      <Controles bloqueado={bloqueado} />
 
       <ResultadoRonda ir={ir} />
     </div>

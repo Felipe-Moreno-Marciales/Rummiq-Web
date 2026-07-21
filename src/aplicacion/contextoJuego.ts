@@ -11,6 +11,8 @@ export interface ValorContextoJuego {
   readonly nuevaPartida: (config: ConfiguracionPartida) => void;
   readonly reanudar: () => boolean;
   readonly salir: () => void;
+  /** Hace que la máquina juegue el turno actual. */
+  readonly jugarBot: () => void;
 }
 
 export const ContextoJuego = createContext<ValorContextoJuego | null>(null);

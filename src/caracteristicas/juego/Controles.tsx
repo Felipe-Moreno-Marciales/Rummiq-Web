@@ -3,7 +3,11 @@ import { Boton } from '@/componentes/Boton';
 import { usarJuego } from '@/ganchos/usarJuego';
 import estilos from './Controles.module.css';
 
-export function Controles() {
+interface Props {
+  readonly bloqueado?: boolean;
+}
+
+export function Controles({ bloqueado = false }: Props) {
   const { estado, despachar } = usarJuego();
   if (!estado) return null;
 
@@ -12,23 +16,31 @@ export function Controles() {
   return (
     <section className={estilos.controles} aria-label="Controles del turno">
       <div className={estilos.botones}>
-        <Boton variante="primario" onClick={() => despachar({ tipo: 'CONFIRMAR' })}>
+        <Boton
+          variante="primario"
+          onClick={() => despachar({ tipo: 'CONFIRMAR' })}
+          disabled={bloqueado}
+        >
           Confirmar jugada
         </Boton>
         <Boton
           variante="secundario"
           onClick={() => despachar({ tipo: 'ROBAR' })}
-          disabled={pozoVacio}
+          disabled={bloqueado || pozoVacio}
         >
           Robar ficha
         </Boton>
-        <Boton variante="secundario" onClick={() => despachar({ tipo: 'DESHACER_TURNO' })}>
+        <Boton
+          variante="secundario"
+          onClick={() => despachar({ tipo: 'DESHACER_TURNO' })}
+          disabled={bloqueado}
+        >
           Deshacer turno
         </Boton>
         <Boton
           variante="secundario"
           onClick={() => despachar({ tipo: 'PASAR' })}
-          disabled={!pozoVacio}
+          disabled={bloqueado || !pozoVacio}
           title={pozoVacio ? undefined : 'Solo puedes pasar cuando el pozo está vacío'}
         >
           Pasar

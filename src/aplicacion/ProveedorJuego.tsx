@@ -5,6 +5,7 @@
  */
 import { useCallback, useEffect, useMemo, useReducer, type ReactNode } from 'react';
 import { crearPartida, reducir } from '@/dominio/juego/motorJuego';
+import { aplicarJugadaBot } from '@/dominio/juego/bot';
 import { cargarPartida, guardarPartida } from '@/servicios/almacenamiento/almacenamientoPartida';
 import type { AccionJuego, ConfiguracionPartida, EstadoJuego } from '@/dominio/juego/tiposMotor';
 import { ContextoJuego, type ValorContextoJuego } from './contextoJuego';
@@ -13,7 +14,8 @@ type AccionApp =
   | { readonly tipo: 'NUEVA'; readonly estado: EstadoJuego }
   | { readonly tipo: 'CARGAR'; readonly estado: EstadoJuego }
   | { readonly tipo: 'SALIR' }
-  | { readonly tipo: 'JUEGO'; readonly accion: AccionJuego };
+  | { readonly tipo: 'JUEGO'; readonly accion: AccionJuego }
+  | { readonly tipo: 'BOT' };
 
 function reductorApp(estado: EstadoJuego | null, accion: AccionApp): EstadoJuego | null {
   switch (accion.tipo) {
@@ -24,6 +26,8 @@ function reductorApp(estado: EstadoJuego | null, accion: AccionApp): EstadoJuego
       return null;
     case 'JUEGO':
       return estado ? reducir(estado, accion.accion) : estado;
+    case 'BOT':
+      return estado ? aplicarJugadaBot(estado) : estado;
     default:
       return estado;
   }
@@ -57,9 +61,13 @@ export function ProveedorJuego({ children }: { readonly children: ReactNode }) {
     despacharApp({ tipo: 'SALIR' });
   }, []);
 
+  const jugarBot = useCallback(() => {
+    despacharApp({ tipo: 'BOT' });
+  }, []);
+
   const valor = useMemo<ValorContextoJuego>(
-    () => ({ estado, despachar, nuevaPartida, reanudar, salir }),
-    [estado, despachar, nuevaPartida, reanudar, salir],
+    () => ({ estado, despachar, nuevaPartida, reanudar, salir, jugarBot }),
+    [estado, despachar, nuevaPartida, reanudar, salir, jugarBot],
   );
 
   return <ContextoJuego.Provider value={valor}>{children}</ContextoJuego.Provider>;
