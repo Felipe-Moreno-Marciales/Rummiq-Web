@@ -37,10 +37,16 @@ Los identificadores en español van **sin tilde ni ñ** (por ejemplo,
 - La IA solo usa información propia (su mano y la mesa) y **nunca** debe generar
   estados ilegales.
 
+## Gestor de paquetes
+
+Funciona con **npm** o **pnpm**. La integración continua usa npm (`npm ci`), por
+lo que si añades o quitas dependencias debes mantener `package-lock.json`
+sincronizado. Con pnpm, `pnpm-workspace.yaml` autoriza el build de `esbuild`.
+
 ## Comprobaciones obligatorias antes de terminar
 
 ```bash
-npm run typecheck
+npm run typecheck      # o: pnpm run typecheck
 npm run lint
 npm run format:check
 npm run test:run
