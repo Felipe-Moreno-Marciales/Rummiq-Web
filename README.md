@@ -54,24 +54,39 @@ funciones puras e inmutables, sin dependencia de React. Detalle en
 
 ## Requisitos
 
-- Node.js 20.19 o superior y npm.
+- Node.js 20.19 o superior.
+- Gestor de paquetes: **npm** o **pnpm** (ambos funcionan).
 
 ## Instalación
+
+Con npm:
 
 ```bash
 npm install
 ```
 
+Con pnpm:
+
+```bash
+pnpm install
+```
+
+> Con pnpm, el repositorio incluye `pnpm-workspace.yaml` con `allowBuilds` para
+> autorizar el script de build de `esbuild` (que Vite necesita) y evitar el error
+> `ERR_PNPM_IGNORED_BUILDS`.
+
 ## Ejecución local
 
 ```bash
-npm run dev
+npm run dev     # o: pnpm run dev
 ```
 
 Abre la dirección que indica Vite. Ten en cuenta que la aplicación usa el base
 path `/rummiq-web/`.
 
 ## Scripts
+
+Ejecuta cualquier script con `npm run <script>` o `pnpm <script>`.
 
 | Script                  | Descripción                          |
 | ----------------------- | ------------------------------------ |
