@@ -4,9 +4,10 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// El base path coincide con la ruta de GitHub Pages: https://felipe-moreno-marciales.github.io/rummiq-web/
+// El base path debe coincidir EXACTAMENTE (mayúsculas incluidas) con el nombre
+// del repositorio en GitHub Pages: https://felipe-moreno-marciales.github.io/Rummiq-Web/
 export default defineConfig({
-  base: '/rummiq-web/',
+  base: '/Rummiq-Web/',
   plugins: [
     react(),
     VitePWA({
