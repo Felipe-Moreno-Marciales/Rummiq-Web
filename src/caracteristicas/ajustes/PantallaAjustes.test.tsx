@@ -7,6 +7,7 @@ beforeEach(() => localStorage.clear());
 afterEach(() => {
   localStorage.clear();
   document.documentElement.removeAttribute('data-tema');
+  document.documentElement.removeAttribute('data-acento');
 });
 
 describe('Pantalla de ajustes', () => {
@@ -20,6 +21,15 @@ describe('Pantalla de ajustes', () => {
     await usuario.click(screen.getByRole('button', { name: /^oscuro$/i }));
     await waitFor(() => expect(document.documentElement.dataset.tema).toBe('oscuro'));
     expect(localStorage.getItem('rummiq:ajustes')).toContain('oscuro');
+  });
+
+  it('cambia el color de acento y lo aplica al documento', async () => {
+    const usuario = userEvent.setup();
+    renderAplicacion();
+
+    await usuario.click(screen.getByRole('button', { name: /^ajustes$/i }));
+    await usuario.click(screen.getByRole('button', { name: /turquesa/i }));
+    await waitFor(() => expect(document.documentElement.dataset.acento).toBe('turquesa'));
   });
 
   it('borra todos los datos tras confirmar', async () => {

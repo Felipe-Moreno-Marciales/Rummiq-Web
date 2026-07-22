@@ -15,8 +15,21 @@ describe('almacenamiento de ajustes', () => {
   });
 
   it('guarda y recupera los ajustes', () => {
-    guardarAjustes({ tema: 'oscuro', sonidos: false, animaciones: false });
-    expect(cargarAjustes()).toEqual({ tema: 'oscuro', sonidos: false, animaciones: false });
+    guardarAjustes({ tema: 'oscuro', acento: 'turquesa', sonidos: false, animaciones: false });
+    expect(cargarAjustes()).toEqual({
+      tema: 'oscuro',
+      acento: 'turquesa',
+      sonidos: false,
+      animaciones: false,
+    });
+  });
+
+  it('usa el acento por defecto si falta o no es válido', () => {
+    localStorage.setItem(
+      'rummiq:ajustes',
+      JSON.stringify({ tema: 'claro', sonidos: true, animaciones: true }),
+    );
+    expect(cargarAjustes().acento).toBe('azul');
   });
 
   it('ignora datos corruptos o con forma inválida', () => {
@@ -27,7 +40,7 @@ describe('almacenamiento de ajustes', () => {
   });
 
   it('borra los ajustes guardados', () => {
-    guardarAjustes({ tema: 'claro', sonidos: true, animaciones: true });
+    guardarAjustes({ tema: 'claro', acento: 'rosa', sonidos: true, animaciones: true });
     borrarAjustes();
     expect(cargarAjustes()).toEqual(AJUSTES_POR_DEFECTO);
   });
