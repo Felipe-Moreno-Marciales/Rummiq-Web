@@ -83,7 +83,7 @@ npm run dev     # o: pnpm run dev
 ```
 
 Abre la dirección que indica Vite. Ten en cuenta que la aplicación usa el base
-path `/rummiq-web/`.
+path `/Rummiq-Web/`.
 
 ## Scripts
 
@@ -122,8 +122,9 @@ npm run preview
 ## GitHub Pages
 
 La aplicación está pensada para publicarse en
-`https://felipe-moreno-marciales.github.io/rummiq-web/`. La configuración usa
-`base: "/rummiq-web/"`. Los workflows de `.github/workflows/` preparan la
+`https://felipe-moreno-marciales.github.io/Rummiq-Web/`. La configuración usa
+`base: "/Rummiq-Web/"` (debe coincidir exactamente, mayúsculas incluidas, con el
+nombre del repositorio). Los workflows de `.github/workflows/` preparan la
 integración continua y el despliegue con las acciones oficiales de GitHub Pages;
 el despliegue y la activación de Pages los decide la persona propietaria.
 
