@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Resolución de módulos */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -14,7 +13,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Comprobaciones estrictas */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -24,10 +22,8 @@
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* Alias de rutas */
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src"]
