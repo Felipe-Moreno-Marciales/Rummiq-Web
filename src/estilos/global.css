@@ -1,24 +1,54 @@
 :root {
   color-scheme: light dark;
 
-  --color-fondo: #f4f1ea;
+  /* Paleta clara */
+  --color-fondo: #eef1fb;
+  --degradado-fondo:
+    radial-gradient(
+      1100px 600px at 15% -10%,
+      color-mix(in srgb, var(--acento-a) 20%, white) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 500px at 110% 10%,
+      color-mix(in srgb, var(--acento-b) 16%, white) 0%,
+      transparent 50%
+    ),
+    linear-gradient(160deg, #eef1fb 0%, #f4f5fc 55%, #eef2f7 100%);
   --color-superficie: #ffffff;
-  --color-texto: #1c1b1a;
-  --color-texto-atenuado: #5c5852;
-  --color-acento: #b3541e;
-  --color-acento-texto: #ffffff;
-  --color-borde: #d8d0bf;
-  --color-superficie-2: #efe8da;
-  --color-error: #b3261e;
-  --color-exito: #2e7d32;
+  --color-superficie-2: #f1f3fc;
+  --color-texto: #191b2e;
+  --color-texto-atenuado: #5a5e7a;
+  --color-borde: #e4e7f2;
 
-  /* Colores de ficha (se mantienen claras en ambos temas, como fichas reales). */
-  --ficha-fondo: #faf4e6;
-  --ficha-texto: #1c1b1a;
-  --ficha-rojo: #c0392b;
-  --ficha-azul: #1f6fb2;
-  --ficha-amarillo: #a8760a;
-  --ficha-negro: #222020;
+  /* Tonos base del acento (por defecto azul); los cambia [data-acento]. */
+  --acento-a: #2563eb;
+  --acento-b: #1d4ed8;
+  --color-acento: var(--acento-a);
+  --color-acento-2: var(--acento-b);
+  --color-acento-texto: #ffffff;
+  --degradado-marca: linear-gradient(135deg, var(--acento-a), var(--acento-b));
+
+  --color-error: #dc2626;
+  --color-exito: #059669;
+  --tapete: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--acento-a) 10%, white),
+    color-mix(in srgb, var(--acento-b) 12%, white)
+  );
+
+  --sombra-suave: 0 1px 3px rgb(18 20 45 / 0.08);
+  --sombra-media: 0 10px 30px rgb(18 20 45 / 0.12);
+  --sombra-fuerte: 0 20px 45px rgb(18 20 45 / 0.25);
+  --radio: 0.9rem;
+
+  /* Fichas (claras en ambos temas, como fichas reales). */
+  --ficha-fondo: linear-gradient(160deg, #ffffff, #efece0);
+  --ficha-texto: #1a1c2e;
+  --ficha-rojo: #e11d48;
+  --ficha-azul: #2563eb;
+  --ficha-amarillo: #b45309;
+  --ficha-negro: #1f2937;
 
   font-family:
     system-ui,
@@ -31,34 +61,115 @@
   line-height: 1.5;
 }
 
+/* Color de acento seleccionable. Cada opción define solo sus dos tonos base;
+   los temas claro y oscuro derivan el resto (véanse los bloques de tema). */
+:root[data-acento='azul'] {
+  --acento-a: #2563eb;
+  --acento-b: #1d4ed8;
+}
+:root[data-acento='violeta'] {
+  --acento-a: #6d28d9;
+  --acento-b: #7c3aed;
+}
+:root[data-acento='turquesa'] {
+  --acento-a: #0e7490;
+  --acento-b: #0891b2;
+}
+:root[data-acento='esmeralda'] {
+  --acento-a: #047857;
+  --acento-b: #059669;
+}
+:root[data-acento='rosa'] {
+  --acento-a: #be185d;
+  --acento-b: #db2777;
+}
+:root[data-acento='naranja'] {
+  --acento-a: #c2410c;
+  --acento-b: #b45309;
+}
+
 /* Variables del tema oscuro, reutilizadas por el tema oscuro explícito y por el
    automático cuando el sistema prefiere oscuro. */
 :root[data-tema='oscuro'] {
-  --color-fondo: #16130f;
-  --color-superficie: #23201b;
-  --color-texto: #f2ece1;
-  --color-texto-atenuado: #b3aa9a;
-  --color-acento: #e08a4b;
-  --color-acento-texto: #16130f;
-  --color-borde: #3a352d;
-  --color-superficie-2: #2c2822;
-  --color-error: #ef8a82;
-  --color-exito: #86c98a;
+  --color-fondo: #101113;
+  --degradado-fondo:
+    radial-gradient(
+      1100px 600px at 15% -10%,
+      color-mix(in srgb, var(--acento-a) 30%, #101113) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 500px at 110% 10%,
+      color-mix(in srgb, var(--acento-b) 24%, #101113) 0%,
+      transparent 50%
+    ),
+    linear-gradient(160deg, #101113 0%, #141518 60%, #0e0f11 100%);
+  --color-superficie: #191a1e;
+  --color-superficie-2: #23242a;
+  --color-texto: #eceef2;
+  --color-texto-atenuado: #a6a9b4;
+  --color-borde: #33353d;
+  --color-acento: color-mix(in srgb, var(--acento-a) 62%, white);
+  --color-acento-2: color-mix(in srgb, var(--acento-b) 62%, white);
+  --color-acento-texto: #0b0c1c;
+  --degradado-marca: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--acento-a) 58%, white),
+    color-mix(in srgb, var(--acento-b) 58%, white)
+  );
+  --color-error: #f87171;
+  --color-exito: #34d399;
+  --tapete: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--acento-a) 16%, #17181c),
+    color-mix(in srgb, var(--acento-b) 13%, #111216)
+  );
+
+  --sombra-suave: 0 1px 3px rgb(0 0 0 / 0.35);
+  --sombra-media: 0 12px 32px rgb(0 0 0 / 0.45);
+  --sombra-fuerte: 0 20px 48px rgb(0 0 0 / 0.6);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-tema]),
   :root[data-tema='automatico'] {
-    --color-fondo: #16130f;
-    --color-superficie: #23201b;
-    --color-texto: #f2ece1;
-    --color-texto-atenuado: #b3aa9a;
-    --color-acento: #e08a4b;
-    --color-acento-texto: #16130f;
-    --color-borde: #3a352d;
-    --color-superficie-2: #2c2822;
-    --color-error: #ef8a82;
-    --color-exito: #86c98a;
+    --color-fondo: #101113;
+    --degradado-fondo:
+      radial-gradient(
+        1100px 600px at 15% -10%,
+        color-mix(in srgb, var(--acento-a) 30%, #101113) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        900px 500px at 110% 10%,
+        color-mix(in srgb, var(--acento-b) 24%, #101113) 0%,
+        transparent 50%
+      ),
+      linear-gradient(160deg, #101113 0%, #141518 60%, #0e0f11 100%);
+    --color-superficie: #191a1e;
+    --color-superficie-2: #23242a;
+    --color-texto: #eceef2;
+    --color-texto-atenuado: #a6a9b4;
+    --color-borde: #33353d;
+    --color-acento: color-mix(in srgb, var(--acento-a) 62%, white);
+    --color-acento-2: color-mix(in srgb, var(--acento-b) 62%, white);
+    --color-acento-texto: #0b0c1c;
+    --degradado-marca: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--acento-a) 58%, white),
+      color-mix(in srgb, var(--acento-b) 58%, white)
+    );
+    --color-error: #f87171;
+    --color-exito: #34d399;
+    --tapete: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--acento-a) 16%, #17181c),
+      color-mix(in srgb, var(--acento-b) 13%, #111216)
+    );
+
+    --sombra-suave: 0 1px 3px rgb(0 0 0 / 0.35);
+    --sombra-media: 0 12px 32px rgb(0 0 0 / 0.45);
+    --sombra-fuerte: 0 20px 48px rgb(0 0 0 / 0.6);
   }
 }
 
@@ -76,13 +187,31 @@ body {
 
 body {
   min-height: 100dvh;
-  background: var(--color-fondo);
+  background-color: var(--color-fondo);
+  background-image: var(--degradado-fondo);
+  background-attachment: fixed;
   color: var(--color-texto);
   -webkit-font-smoothing: antialiased;
 }
 
 #root {
   min-height: 100dvh;
+}
+
+/* Entrada sutil de cada pantalla. */
+main {
+  animation: aparecer 0.35s ease both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 :focus-visible {

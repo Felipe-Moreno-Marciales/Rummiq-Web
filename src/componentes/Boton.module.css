@@ -1,18 +1,27 @@
 .boton {
   font: inherit;
   font-weight: 600;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 1.1rem;
   min-height: 44px; /* área táctil cómoda */
-  border-radius: 0.6rem;
+  border-radius: 0.7rem;
   border: 1px solid var(--color-borde);
   background: var(--color-superficie);
   color: var(--color-texto);
   cursor: pointer;
-  transition: filter 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .boton:hover:not(:disabled) {
-  filter: brightness(0.97);
+  transform: translateY(-1px);
+  box-shadow: var(--sombra-media);
+}
+
+.boton:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .boton:disabled {
@@ -25,9 +34,14 @@
 }
 
 .primario {
-  background: var(--color-acento);
+  background-image: var(--degradado-marca);
   color: var(--color-acento-texto);
   border-color: transparent;
+  box-shadow: var(--sombra-suave);
+}
+
+.primario:hover:not(:disabled) {
+  filter: brightness(1.06);
 }
 
 .secundario {
@@ -43,4 +57,9 @@
 .fantasma {
   background: transparent;
   border-color: transparent;
+}
+
+.fantasma:hover:not(:disabled) {
+  background: var(--color-superficie-2);
+  box-shadow: none;
 }
