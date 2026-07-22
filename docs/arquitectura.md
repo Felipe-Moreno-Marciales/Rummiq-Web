@@ -68,7 +68,8 @@ mesa existente.
 - **Inmutabilidad y determinismo**: facilitan pruebas y persistencia.
 - **Sin backend**: la aplicación es un sitio estático; los datos viven en el
   navegador.
-- **Base path**: `/rummiq-web/` para GitHub Pages; las rutas de recursos son
+- **Base path**: `/Rummiq-Web/` para GitHub Pages (coincide con el nombre del
+  repositorio, mayúsculas incluidas); las rutas de recursos son
   relativas para funcionar en el subdirectorio.
 - **Estado global mínimo**: `useReducer` + Context, sin librerías externas de
   estado.
