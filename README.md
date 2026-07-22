@@ -19,7 +19,8 @@ ni servicios externos: todo ocurre en tu navegador.
   reorganización de la mesa tras abrir.
 - Arrastrar y soltar (ratón y táctil) y una alternativa completa por selección y
   botones, totalmente operable con teclado.
-- Temas claro, oscuro y automático; sonidos originales; animaciones
+- Temas claro, oscuro y automático, **color de acento seleccionable** (azul,
+  violeta, turquesa, esmeralda, rosa o naranja), sonidos originales y animaciones
   desactivables.
 - Instalable como PWA y utilizable sin conexión tras la primera carga.
 

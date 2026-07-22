@@ -20,8 +20,10 @@ y el proyecto sigue el [versionado semántico](https://semver.org/lang/es/).
 - Interacciones: arrastrar y soltar (ratón y táctil) y alternativa accesible por
   selección y botones; diálogos accesibles y regiones live.
 - IA local con dificultades fácil, media y difícil.
-- Ajustes de tema (claro/oscuro/automático), sonidos originales con Web Audio
-  API y animaciones desactivables; estadísticas y borrado de datos.
+- Ajustes de tema (claro/oscuro/automático), **color de acento seleccionable**
+  (azul, violeta, turquesa, esmeralda, rosa o naranja), sonidos originales con
+  Web Audio API y animaciones desactivables; estadísticas y borrado de datos.
+- Rediseño visual vibrante con degradados, fichas pulidas y tablero tipo tapete.
 - PWA instalable con service worker, aviso de actualización e iconos originales.
 - Documentación y workflows de integración continua y despliegue.
 - Compatibilidad con pnpm (`pnpm-workspace.yaml` que autoriza el build de
