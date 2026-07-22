@@ -15,6 +15,7 @@ function aplicarAlDocumento(ajustes: Ajustes): void {
   if (typeof document === 'undefined') return;
   const raiz = document.documentElement;
   raiz.dataset.tema = ajustes.tema;
+  raiz.dataset.acento = ajustes.acento;
   raiz.dataset.animaciones = ajustes.animaciones ? 'si' : 'no';
   raiz.style.colorScheme =
     ajustes.tema === 'automatico' ? 'light dark' : ajustes.tema === 'oscuro' ? 'dark' : 'light';

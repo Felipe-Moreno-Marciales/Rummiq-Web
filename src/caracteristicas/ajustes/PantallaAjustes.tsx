@@ -8,7 +8,7 @@ import { borrarPartida } from '@/servicios/almacenamiento/almacenamientoPartida'
 import { borrarAjustes } from '@/servicios/almacenamiento/almacenamientoAjustes';
 import { borrarEstadisticas } from '@/servicios/almacenamiento/almacenamientoEstadisticas';
 import { reproducirSonido } from '@/servicios/audio/sonidos';
-import type { Tema } from '@/servicios/almacenamiento/almacenamientoAjustes';
+import type { Acento, Tema } from '@/servicios/almacenamiento/almacenamientoAjustes';
 import type { Pantalla } from '@/aplicacion/pantallas';
 import estilos from './PantallaAjustes.module.css';
 
@@ -20,6 +20,19 @@ const TEMAS: { readonly valor: Tema; readonly etiqueta: string }[] = [
   { valor: 'claro', etiqueta: 'Claro' },
   { valor: 'oscuro', etiqueta: 'Oscuro' },
   { valor: 'automatico', etiqueta: 'Automático' },
+];
+
+const ACENTOS: { readonly valor: Acento; readonly etiqueta: string; readonly colores: string }[] = [
+  { valor: 'azul', etiqueta: 'Azul', colores: 'linear-gradient(135deg, #2563eb, #1d4ed8)' },
+  { valor: 'violeta', etiqueta: 'Violeta', colores: 'linear-gradient(135deg, #6d28d9, #7c3aed)' },
+  { valor: 'turquesa', etiqueta: 'Turquesa', colores: 'linear-gradient(135deg, #0e7490, #0891b2)' },
+  {
+    valor: 'esmeralda',
+    etiqueta: 'Esmeralda',
+    colores: 'linear-gradient(135deg, #047857, #059669)',
+  },
+  { valor: 'rosa', etiqueta: 'Rosa', colores: 'linear-gradient(135deg, #be185d, #db2777)' },
+  { valor: 'naranja', etiqueta: 'Naranja', colores: 'linear-gradient(135deg, #c2410c, #b45309)' },
 ];
 
 export function PantallaAjustes({ ir }: Props) {
@@ -58,6 +71,27 @@ export function PantallaAjustes({ ir }: Props) {
                 onClick={() => actualizar({ tema: tema.valor })}
               >
                 {tema.etiqueta}
+              </Boton>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset className={estilos.grupo}>
+          <legend className={estilos.leyenda}>Color de acento</legend>
+          <div className={estilos.opciones} role="group" aria-label="Color de acento">
+            {ACENTOS.map((acento) => (
+              <Boton
+                key={acento.valor}
+                variante={ajustes.acento === acento.valor ? 'primario' : 'secundario'}
+                aria-pressed={ajustes.acento === acento.valor}
+                onClick={() => actualizar({ acento: acento.valor })}
+              >
+                <span
+                  className={estilos.muestra}
+                  style={{ background: acento.colores }}
+                  aria-hidden="true"
+                />
+                {acento.etiqueta}
               </Boton>
             ))}
           </div>
